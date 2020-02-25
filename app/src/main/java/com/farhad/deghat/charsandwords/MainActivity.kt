@@ -1,7 +1,9 @@
 package com.farhad.deghat.charsandwords
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -17,8 +19,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var viewModel: MainActivityViewModel
 
     //UI components
-    private lateinit var txtViwTenthChat: TextView
+    private lateinit var txtViwTenthChar: TextView
     private lateinit var btnFire: Button
+    private lateinit var pgrsBarTenthChar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,12 +36,22 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setUiComponents() {
-        txtViwTenthChat = findViewById(R.id.txtViwTenthChar)
+        txtViwTenthChar = findViewById(R.id.txtViwTenthChar)
         btnFire = findViewById(R.id.btnFire)
         btnFire.setOnClickListener { viewModel.btnFireClicked() }
+        pgrsBarTenthChar = findViewById(R.id.pgrsBarTenthChar)
+        pgrsBarTenthChar.visibility = View.GONE
     }
 
     private fun setObservers() {
-        viewModel.tenthCharacter.observe(this, Observer { txtViwTenthChat.text = it.toString() })
+        viewModel.tenthCharacter.observe(
+            this,
+            Observer { tenthChar -> txtViwTenthChar.text = tenthChar.toString() })
+        viewModel.showTenthCharProgress.observe(this, Observer { showProgress ->
+            if (showProgress)
+                pgrsBarTenthChar.visibility = View.VISIBLE
+            else
+                pgrsBarTenthChar.visibility = View.GONE
+        })
     }
 }

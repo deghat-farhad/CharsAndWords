@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">CharsAndWords</string>
     <string name="btnFireText">FIRE</string>
+    <string name="txtViwTenthCharHint">Tenth character</string>
 </resources>
