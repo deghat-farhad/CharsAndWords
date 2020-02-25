@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">CharsAndWords</string>
+    <string name="btnFireText">FIRE</string>
 </resources>
