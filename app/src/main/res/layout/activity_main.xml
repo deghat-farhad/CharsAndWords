@@ -8,13 +8,19 @@
 
     <TextView
         android:id="@+id/txtViwTenthChar"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@android:color/darker_gray"
+        android:hint="@string/txtViwTenthCharHint"
+        android:padding="2dp"
+        android:paddingStart="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="txtViwTenthChar"
-        android:layout_margin="10dp"
-        android:hint="@string/txtViwTenthCharHint"/>
+        tools:text="txtViwTenthChar" />
 
     <Button
         android:id="@+id/btnFire"
@@ -31,8 +37,37 @@
         style="?android:attr/progressBarStyle"
         android:layout_width="19dp"
         android:layout_height="19dp"
-        app:layout_constraintStart_toEndOf="@+id/txtViwTenthChar"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_margin="10dp" />
+        android:layout_marginRight="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/txtViwTenthChar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/txtViwTenthChar" />
+
+    <TextView
+        android:id="@+id/txtViwEvery10thChar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@android:color/darker_gray"
+        android:hint="@string/every_10th_character"
+        android:maxLines="12"
+        android:padding="2dp"
+        android:paddingStart="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:scrollbars="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtViwTenthChar"
+        tools:text="txtViwEvery10thChar" />
+
+    <ProgressBar
+        android:id="@+id/pgrsBarEvery10thChar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="19dp"
+        android:layout_height="19dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/txtViwEvery10thChar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

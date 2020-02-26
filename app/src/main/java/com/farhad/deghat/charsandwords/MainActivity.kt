@@ -1,6 +1,7 @@
 package com.farhad.deghat.charsandwords
 
 import android.os.Bundle
+import android.text.method.ScrollingMovementMethod
 import android.view.View
 import android.widget.Button
 import android.widget.ProgressBar
@@ -19,9 +20,13 @@ class MainActivity : AppCompatActivity() {
     private lateinit var viewModel: MainActivityViewModel
 
     //UI components
-    private lateinit var txtViwTenthChar: TextView
     private lateinit var btnFire: Button
+
+    private lateinit var txtViwTenthChar: TextView
     private lateinit var pgrsBarTenthChar: ProgressBar
+
+    private lateinit var txtViwEvery10Char: TextView
+    private lateinit var pgrsBarEvery10thChar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,22 +41,44 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setUiComponents() {
-        txtViwTenthChar = findViewById(R.id.txtViwTenthChar)
         btnFire = findViewById(R.id.btnFire)
         btnFire.setOnClickListener { viewModel.btnFireClicked() }
+
+        txtViwTenthChar = findViewById(R.id.txtViwTenthChar)
+
         pgrsBarTenthChar = findViewById(R.id.pgrsBarTenthChar)
         pgrsBarTenthChar.visibility = View.GONE
+
+        txtViwEvery10Char = findViewById(R.id.txtViwEvery10thChar)
+        txtViwEvery10Char.movementMethod = ScrollingMovementMethod()
+
+        pgrsBarEvery10thChar = findViewById(R.id.pgrsBarEvery10thChar)
+        pgrsBarEvery10thChar.visibility = View.GONE
     }
 
     private fun setObservers() {
         viewModel.tenthCharacter.observe(
             this,
             Observer { tenthChar -> txtViwTenthChar.text = tenthChar.toString() })
+
         viewModel.showTenthCharProgress.observe(this, Observer { showProgress ->
-            if (showProgress)
-                pgrsBarTenthChar.visibility = View.VISIBLE
-            else
-                pgrsBarTenthChar.visibility = View.GONE
+            pgrsBarTenthChar.visibility =
+                if (showProgress)
+                    View.VISIBLE
+                else
+                    View.GONE
+        })
+
+        viewModel.every10thCharactersSequence.observe(
+            this,
+            Observer { every10CharSequence -> txtViwEvery10Char.text = every10CharSequence })
+
+        viewModel.showEvery10thCharProgress.observe(this, Observer { showProgress ->
+            pgrsBarEvery10thChar.visibility =
+                if (showProgress)
+                    View.VISIBLE
+                else
+                    View.GONE
         })
     }
 }
