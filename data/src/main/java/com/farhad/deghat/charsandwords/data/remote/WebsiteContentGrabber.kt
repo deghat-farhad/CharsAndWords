@@ -6,7 +6,9 @@ import java.lang.Exception
 import java.net.URL
 import javax.inject.Inject
 import javax.inject.Named
+import javax.inject.Singleton
 
+@Singleton
 class WebsiteContentGrabber @Inject constructor(@Named("PAGE_URL") private val pageUrl: String) {
     fun grabContentOf(): Observable<WebPageEntity>{
         return Observable.create{emitter ->
