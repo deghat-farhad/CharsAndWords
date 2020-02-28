@@ -68,7 +68,10 @@ class MainActivity : AppCompatActivity() {
     private fun setObservers() {
         viewModel.tenthCharacter.observe(
             this,
-            Observer { tenthChar -> txtViwTenthChar.text = tenthChar.toString() })
+            Observer { tenthChar ->
+                val text = "${getString(R.string.The_10th_char)}'$tenthChar'"
+                txtViwTenthChar.text = text
+            })
 
         viewModel.showTenthCharProgress.observe(this, Observer { showProgress ->
             pgrsBarTenthChar.visibility =
