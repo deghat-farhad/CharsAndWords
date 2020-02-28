@@ -6,6 +6,8 @@ import com.farhad.deghat.charsandwords.domain.useCase.base.DefaultObserver
 import com.farhad.deghat.charsandwords.domain.useCase.Every10thCharacterUseCase
 import com.farhad.deghat.charsandwords.domain.useCase.TenthCharacterUseCase
 import com.farhad.deghat.charsandwords.domain.useCase.WordCounterUseCase
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxkotlin.addTo
 import javax.inject.Inject
 
 class MainActivityViewModel @Inject constructor(
@@ -13,6 +15,8 @@ class MainActivityViewModel @Inject constructor(
     private val every10thCharacterUseCase: Every10thCharacterUseCase,
     private val wordCounterUseCase: WordCounterUseCase
 ): ViewModel() {
+
+    private val compositeDisposable = CompositeDisposable()
 
     val tenthCharacter: MutableLiveData<Char> by lazy { MutableLiveData<Char>() }
     val showTenthCharProgress: MutableLiveData<Boolean> by lazy { MutableLiveData<Boolean>() }
@@ -42,7 +46,7 @@ class MainActivityViewModel @Inject constructor(
         }
 
         showTenthCharProgress.value = true
-        tenthCharacterUseCase.execute(tenthCharacterObserver)
+        tenthCharacterUseCase.execute(tenthCharacterObserver)?.addTo(compositeDisposable)
     }
 
     private fun executeEvery10thCharacterUseCase(){
@@ -64,7 +68,7 @@ class MainActivityViewModel @Inject constructor(
         }
 
         showEvery10thCharProgress.value = true
-        every10thCharacterUseCase.execute(every10thCharacterObserver)
+        every10thCharacterUseCase.execute(every10thCharacterObserver)?.addTo(compositeDisposable)
     }
 
     private fun executeWordCounterUseCase(){
@@ -86,12 +90,17 @@ class MainActivityViewModel @Inject constructor(
         }
 
         showWordCounterProgress.value = true
-        wordCounterUseCase.execute(wordCounterObserver)
+        wordCounterUseCase.execute(wordCounterObserver)?.addTo(compositeDisposable)
     }
 
     fun btnFireClicked() {
         executeTenthCharacterUseCase()
         executeEvery10thCharacterUseCase()
         executeWordCounterUseCase()
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        compositeDisposable.dispose()
     }
 }
