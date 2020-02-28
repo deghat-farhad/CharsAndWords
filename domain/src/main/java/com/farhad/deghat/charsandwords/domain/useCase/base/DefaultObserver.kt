@@ -1,4 +1,4 @@
-package com.farhad.deghat.charsandwords.domain.base
+package com.farhad.deghat.charsandwords.domain.useCase.base
 
 import io.reactivex.observers.DisposableObserver
 

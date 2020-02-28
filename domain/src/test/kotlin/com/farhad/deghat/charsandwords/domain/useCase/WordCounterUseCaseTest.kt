@@ -1,4 +1,4 @@
-package com.farhad.deghat.charsandwords.domain.wordCounter
+package com.farhad.deghat.charsandwords.domain.useCase
 
 import com.farhad.deghat.charsandwords.domain.model.WebPage
 import com.farhad.deghat.charsandwords.domain.repository.WebPageRepository
@@ -31,7 +31,11 @@ class WordCounterUseCaseTest {
         Mockito.`when`(webPageRepository.getWebPage()).thenReturn(webPageObservable)
 
         val wordCounterUseCase =
-            WordCounterUseCase(subscribeOnScheduler, observeOnScheduler, webPageRepository)
+            WordCounterUseCase(
+                subscribeOnScheduler,
+                observeOnScheduler,
+                webPageRepository
+            )
 
         wordCounterUseCase.buildObservable().test().assertValue {
             it == "test --> 4\nboo --> 3"

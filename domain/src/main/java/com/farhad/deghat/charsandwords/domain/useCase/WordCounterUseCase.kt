@@ -1,6 +1,6 @@
-package com.farhad.deghat.charsandwords.domain.wordCounter
+package com.farhad.deghat.charsandwords.domain.useCase
 
-import com.farhad.deghat.charsandwords.domain.base.UseCaseNoParams
+import com.farhad.deghat.charsandwords.domain.useCase.base.UseCase
 import com.farhad.deghat.charsandwords.domain.repository.WebPageRepository
 import io.reactivex.Observable
 import io.reactivex.Scheduler
@@ -11,7 +11,7 @@ class WordCounterUseCase(
     subscribeOnScheduler: Scheduler,
     observeOnScheduler: Scheduler,
     private val webPageRepository: WebPageRepository
-): UseCaseNoParams<String>(subscribeOnScheduler, observeOnScheduler) {
+): UseCase<String>(subscribeOnScheduler, observeOnScheduler) {
     override fun buildObservable(): Observable<String> {
         return webPageRepository.getWebPage().map { mapToString(countWords(it.content))}
     }

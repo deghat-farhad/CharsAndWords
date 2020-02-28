@@ -1,9 +1,9 @@
-package com.farhad.deghat.charsandwords.domain.base
+package com.farhad.deghat.charsandwords.domain.useCase.base
 
 import io.reactivex.Observable
 import io.reactivex.Scheduler
 
-abstract class UseCaseNoParams<T>(
+abstract class UseCase<T>(
     private val subscribeOnScheduler: Scheduler,
     private val observeOnScheduler: Scheduler
 ){

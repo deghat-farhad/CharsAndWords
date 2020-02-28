@@ -1,6 +1,6 @@
-package com.farhad.deghat.charsandwords.domain.every10thCharacter
+package com.farhad.deghat.charsandwords.domain.useCase
 
-import com.farhad.deghat.charsandwords.domain.base.UseCaseNoParams
+import com.farhad.deghat.charsandwords.domain.useCase.base.UseCase
 import com.farhad.deghat.charsandwords.domain.model.WebPage
 import com.farhad.deghat.charsandwords.domain.repository.WebPageRepository
 import io.reactivex.Observable
@@ -10,7 +10,7 @@ class Every10thCharacterUseCase(
     subscribeOnScheduler: Scheduler,
     observeOnScheduler: Scheduler,
     private val webPageRepository: WebPageRepository
-): UseCaseNoParams<String>(subscribeOnScheduler, observeOnScheduler) {
+): UseCase<String>(subscribeOnScheduler, observeOnScheduler) {
     override fun buildObservable(): Observable<String> {
         return webPageRepository.getWebPage().map { webPage -> filter10Ths(webPage) }
     }

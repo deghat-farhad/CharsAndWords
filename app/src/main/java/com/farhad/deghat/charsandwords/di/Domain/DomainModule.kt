@@ -1,10 +1,10 @@
 package com.farhad.deghat.charsandwords.di.Domain
 
 import com.farhad.deghat.charsandwords.data.di.DaggerDataComponent
-import com.farhad.deghat.charsandwords.domain.every10thCharacter.Every10thCharacterUseCase
+import com.farhad.deghat.charsandwords.domain.useCase.Every10thCharacterUseCase
 import com.farhad.deghat.charsandwords.domain.repository.WebPageRepository
-import com.farhad.deghat.charsandwords.domain.tenthCharacterRequest.TenthCharacterUseCase
-import com.farhad.deghat.charsandwords.domain.wordCounter.WordCounterUseCase
+import com.farhad.deghat.charsandwords.domain.useCase.TenthCharacterUseCase
+import com.farhad.deghat.charsandwords.domain.useCase.WordCounterUseCase
 import dagger.Module
 import dagger.Provides
 import io.reactivex.Scheduler
@@ -26,7 +26,11 @@ class DomainModule {
         @Named(OBSERVE_ON_NAME)
         observeOnScheduler: Scheduler,
         webPageRepository: WebPageRepository
-        ) = TenthCharacterUseCase(subscribeOnScheduler, observeOnScheduler, webPageRepository)
+        ) = TenthCharacterUseCase(
+        subscribeOnScheduler,
+        observeOnScheduler,
+        webPageRepository
+    )
 
     @Provides
     fun every10thCharacterUseCaseProvider(
@@ -35,7 +39,11 @@ class DomainModule {
         @Named(OBSERVE_ON_NAME)
         observeOnScheduler: Scheduler,
         webPageRepository: WebPageRepository
-    ) = Every10thCharacterUseCase(subscribeOnScheduler, observeOnScheduler, webPageRepository)
+    ) = Every10thCharacterUseCase(
+        subscribeOnScheduler,
+        observeOnScheduler,
+        webPageRepository
+    )
 
     @Provides
     fun wordCounterUseCaseProvider(
@@ -44,7 +52,11 @@ class DomainModule {
         @Named(OBSERVE_ON_NAME)
         observeOnScheduler: Scheduler,
         webPageRepository: WebPageRepository
-    ) = WordCounterUseCase(subscribeOnScheduler, observeOnScheduler, webPageRepository)
+    ) = WordCounterUseCase(
+        subscribeOnScheduler,
+        observeOnScheduler,
+        webPageRepository
+    )
 
     @Provides
     fun webPageRepositoryProvider(): WebPageRepository =

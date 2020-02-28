@@ -2,10 +2,10 @@ package com.farhad.deghat.charsandwords
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.farhad.deghat.charsandwords.domain.base.DefaultObserver
-import com.farhad.deghat.charsandwords.domain.every10thCharacter.Every10thCharacterUseCase
-import com.farhad.deghat.charsandwords.domain.tenthCharacterRequest.TenthCharacterUseCase
-import com.farhad.deghat.charsandwords.domain.wordCounter.WordCounterUseCase
+import com.farhad.deghat.charsandwords.domain.useCase.base.DefaultObserver
+import com.farhad.deghat.charsandwords.domain.useCase.Every10thCharacterUseCase
+import com.farhad.deghat.charsandwords.domain.useCase.TenthCharacterUseCase
+import com.farhad.deghat.charsandwords.domain.useCase.WordCounterUseCase
 import javax.inject.Inject
 
 class MainActivityViewModel @Inject constructor(
