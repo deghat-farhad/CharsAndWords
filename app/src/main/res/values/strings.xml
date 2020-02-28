@@ -3,4 +3,5 @@
     <string name="btnFireText">FIRE</string>
     <string name="txtViwTenthCharHint">Tenth character</string>
     <string name="every_10th_character">Every 10th character</string>
+    <string name="word_counter">Word Counter</string>
 </resources>

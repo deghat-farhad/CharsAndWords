@@ -5,11 +5,13 @@ import androidx.lifecycle.ViewModel
 import com.farhad.deghat.charsandwords.domain.base.DefaultObserver
 import com.farhad.deghat.charsandwords.domain.every10thCharacter.Every10thCharacterUseCase
 import com.farhad.deghat.charsandwords.domain.tenthCharacterRequest.TenthCharacterUseCase
+import com.farhad.deghat.charsandwords.domain.wordCounter.WordCounterUseCase
 import javax.inject.Inject
 
 class MainActivityViewModel @Inject constructor(
     private val tenthCharacterUseCase: TenthCharacterUseCase,
-    private val every10thCharacterUseCase: Every10thCharacterUseCase
+    private val every10thCharacterUseCase: Every10thCharacterUseCase,
+    private val wordCounterUseCase: WordCounterUseCase
 ): ViewModel() {
 
     val tenthCharacter: MutableLiveData<Char> by lazy { MutableLiveData<Char>() }
@@ -17,6 +19,9 @@ class MainActivityViewModel @Inject constructor(
 
     val every10thCharactersSequence: MutableLiveData<String> by lazy { MutableLiveData<String>() }
     val showEvery10thCharProgress: MutableLiveData<Boolean> by lazy { MutableLiveData<Boolean>() }
+
+    val wordCounterOutput: MutableLiveData<String> by lazy { MutableLiveData<String>() }
+    val showWordCounterProgress: MutableLiveData<Boolean> by lazy { MutableLiveData<Boolean>() }
 
     private fun executeTenthCharacterUseCase(){
         val tenthCharacterObserver = object : DefaultObserver<Char>(){
@@ -62,8 +67,31 @@ class MainActivityViewModel @Inject constructor(
         every10thCharacterUseCase.execute(every10thCharacterObserver)
     }
 
+    private fun executeWordCounterUseCase(){
+        val wordCounterObserver = object : DefaultObserver<String>(){
+            override fun onNext(t: String) {
+                super.onNext(t)
+                wordCounterOutput.value = t
+            }
+
+            override fun onComplete() {
+                super.onComplete()
+                showWordCounterProgress.value = false
+            }
+
+            override fun onError(e: Throwable) {
+                super.onError(e)
+                showWordCounterProgress.value = false
+            }
+        }
+
+        showWordCounterProgress.value = true
+        wordCounterUseCase.execute(wordCounterObserver)
+    }
+
     fun btnFireClicked() {
         executeTenthCharacterUseCase()
         executeEvery10thCharacterUseCase()
+        executeWordCounterUseCase()
     }
 }

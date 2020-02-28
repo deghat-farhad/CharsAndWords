@@ -28,6 +28,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var txtViwEvery10Char: TextView
     private lateinit var pgrsBarEvery10thChar: ProgressBar
 
+    private lateinit var txtViwWordCounter: TextView
+    private lateinit var pgrsBarWordCounter: ProgressBar
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -54,6 +57,12 @@ class MainActivity : AppCompatActivity() {
 
         pgrsBarEvery10thChar = findViewById(R.id.pgrsBarEvery10thChar)
         pgrsBarEvery10thChar.visibility = View.GONE
+
+        txtViwWordCounter = findViewById(R.id.txtViwWordCounter)
+        txtViwWordCounter.movementMethod = ScrollingMovementMethod()
+
+        pgrsBarWordCounter = findViewById(R.id.pgrsBarWordCounter)
+        pgrsBarWordCounter.visibility = View.GONE
     }
 
     private fun setObservers() {
@@ -75,6 +84,18 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.showEvery10thCharProgress.observe(this, Observer { showProgress ->
             pgrsBarEvery10thChar.visibility =
+                if (showProgress)
+                    View.VISIBLE
+                else
+                    View.GONE
+        })
+
+        viewModel.wordCounterOutput.observe(
+            this,
+            Observer { wordCounterOutput -> txtViwWordCounter.text = wordCounterOutput })
+
+        viewModel.showWordCounterProgress.observe(this, Observer { showProgress ->
+            pgrsBarWordCounter.visibility =
                 if (showProgress)
                     View.VISIBLE
                 else

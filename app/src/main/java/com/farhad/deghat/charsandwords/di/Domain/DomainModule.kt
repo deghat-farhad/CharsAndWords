@@ -4,6 +4,7 @@ import com.farhad.deghat.charsandwords.data.di.DaggerDataComponent
 import com.farhad.deghat.charsandwords.domain.every10thCharacter.Every10thCharacterUseCase
 import com.farhad.deghat.charsandwords.domain.repository.WebPageRepository
 import com.farhad.deghat.charsandwords.domain.tenthCharacterRequest.TenthCharacterUseCase
+import com.farhad.deghat.charsandwords.domain.wordCounter.WordCounterUseCase
 import dagger.Module
 import dagger.Provides
 import io.reactivex.Scheduler
@@ -35,6 +36,15 @@ class DomainModule {
         observeOnScheduler: Scheduler,
         webPageRepository: WebPageRepository
     ) = Every10thCharacterUseCase(subscribeOnScheduler, observeOnScheduler, webPageRepository)
+
+    @Provides
+    fun wordCounterUseCaseProvider(
+        @Named(SUBSCRIBE_ON_NAME)
+        subscribeOnScheduler: Scheduler,
+        @Named(OBSERVE_ON_NAME)
+        observeOnScheduler: Scheduler,
+        webPageRepository: WebPageRepository
+    ) = WordCounterUseCase(subscribeOnScheduler, observeOnScheduler, webPageRepository)
 
     @Provides
     fun webPageRepositoryProvider(): WebPageRepository =

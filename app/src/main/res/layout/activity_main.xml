@@ -38,6 +38,7 @@
         android:layout_width="19dp"
         android:layout_height="19dp"
         android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
         app:layout_constraintBottom_toBottomOf="@+id/txtViwTenthChar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/txtViwTenthChar" />
@@ -67,7 +68,40 @@
         android:layout_height="19dp"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/txtViwEvery10thChar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/txtViwEvery10thChar" />
+
+
+    <TextView
+        android:id="@+id/txtViwWordCounter"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_marginTop="96dp"
+        android:background="@android:color/darker_gray"
+        android:hint="@string/word_counter"
+        android:maxLines="12"
+        android:padding="2dp"
+        android:paddingStart="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:scrollbars="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtViwEvery10thChar"
+        tools:text="txtViwWordCounter" />
+
+    <ProgressBar
+        android:id="@+id/pgrsBarWordCounter"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="19dp"
+        android:layout_height="19dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/txtViwWordCounter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/txtViwWordCounter" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
