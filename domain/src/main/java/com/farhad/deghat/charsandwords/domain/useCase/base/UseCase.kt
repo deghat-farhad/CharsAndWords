@@ -9,7 +9,7 @@ abstract class UseCase<T>(
 ){
     abstract fun buildObservable(): Observable<T>
 
-    fun execute(observer: DefaultObserver<T>): DefaultObserver<T> {
+    fun execute(observer: DefaultObserver<T>): DefaultObserver<T>?{
         val observable = setSchedulers(buildObservable())
         return observable.subscribeWith(observer)
     }

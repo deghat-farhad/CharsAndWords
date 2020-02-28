@@ -12,6 +12,7 @@ dependencies {
     //test
     testImplementation "junit:junit:$junit4_version"
     testImplementation "org.mockito:mockito-core:$mockito_version"
+    testImplementation "org.mockito:mockito-inline:$mockito_version"
 }
 
 sourceCompatibility = "7"
