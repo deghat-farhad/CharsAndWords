@@ -10,7 +10,7 @@ import javax.inject.Named
 @Module
 class DataModule {
     companion object {
-        const val PAGE_URL = "https://google.com"
+        const val PAGE_URL = "https://blog.truecaller.com/2018/01/22/life-as-an-android-engineer/"
     }
 
     @Provides
