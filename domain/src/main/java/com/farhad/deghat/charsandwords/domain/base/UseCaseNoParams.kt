@@ -7,10 +7,11 @@ abstract class UseCaseNoParams<T>(
     private val subscribeOnScheduler: Scheduler,
     private val observeOnScheduler: Scheduler
 ){
-    protected abstract fun buildObservable(): Observable<T>
+    abstract fun buildObservable(): Observable<T>
 
     fun execute(observer: DefaultObserver<T>): DefaultObserver<T> {
-        return setSchedulers(buildObservable()).subscribeWith(observer)
+        val observable = setSchedulers(buildObservable())
+        return observable.subscribeWith(observer)
     }
 
     private fun setSchedulers(observable: Observable<T>): Observable<T> {
