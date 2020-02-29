@@ -27,6 +27,8 @@ class MainActivityViewModel @Inject constructor(
     val wordCounterOutput: MutableLiveData<String> by lazy { MutableLiveData<String>() }
     val showWordCounterProgress: MutableLiveData<Boolean> by lazy { MutableLiveData<Boolean>() }
 
+    val errorText: MutableLiveData<String> by lazy { MutableLiveData<String>() }
+
     private fun executeTenthCharacterUseCase(){
         val tenthCharacterObserver = object : DefaultObserver<Char>(){
             override fun onNext(t: Char) {
@@ -42,6 +44,7 @@ class MainActivityViewModel @Inject constructor(
             override fun onError(e: Throwable) {
                 super.onError(e)
                 showTenthCharProgress.value = false
+                errorText.value = e.localizedMessage
             }
         }
 
@@ -64,6 +67,7 @@ class MainActivityViewModel @Inject constructor(
             override fun onError(e: Throwable) {
                 super.onError(e)
                 showEvery10thCharProgress.value = false
+                errorText.value = e.localizedMessage
             }
         }
 
@@ -86,6 +90,7 @@ class MainActivityViewModel @Inject constructor(
             override fun onError(e: Throwable) {
                 super.onError(e)
                 showWordCounterProgress.value = false
+                errorText.value = e.localizedMessage
             }
         }
 

@@ -5,4 +5,5 @@
     <string name="every_10th_character">Every 10th character</string>
     <string name="word_counter">Word Counter</string>
     <string name="The_10th_char">The 10th char of the web content is:</string>
+    <string name="errPrefix">Something went wrong:\n</string>
 </resources>

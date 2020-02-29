@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -104,5 +105,11 @@ class MainActivity : AppCompatActivity() {
                 else
                     View.GONE
         })
+
+        viewModel.errorText.observe(this, Observer { errorMsg -> showError(errorMsg) })
+    }
+
+    private fun showError(errorMsg: String){
+        Toast.makeText(this, "${getString(R.string.errPrefix)}$errorMsg", Toast.LENGTH_SHORT).show()
     }
 }
